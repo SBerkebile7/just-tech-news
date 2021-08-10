@@ -67,7 +67,7 @@ router.post('/', (req, res) => {
         req.session.loggedIn = true;
 
         res.json(dbUserData);
-      })
+      });
     })
     .catch(err => {
       console.log(err);
@@ -100,12 +100,12 @@ router.post('/login', (req, res) => {
       req.session.loggedIn = true;
 
       res.json({ user: dbUserData, message: 'You are now logged in!' });
-    })
+    });
   });
 });
 
 router.post('/logout', (req, res) => {
-  if(req.session.loggedIn) {
+  if (req.session.loggedIn) {
     req.session.destroy(() => {
       res.status(204).end();
     });
@@ -125,7 +125,7 @@ router.put('/:id', (req, res) => {
     }
   })
     .then(dbUserData => {
-      if (!dbUserData[0]) {
+      if (!dbUserData) {
         res.status(404).json({ message: 'No user found with this id' });
         return;
       }
